@@ -1,13 +1,21 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+
+import Container from "../components/Container";
+import Contents from "../components/Contents";
+import styled from "styled-components/native";
+
+const Text = styled.Text`
+	font-size: 20px;
+	line-height: 28px;
+`;
 
 const Details = ({ navigation }) => {
 	return (
-		<View>
-			<Text>Details</Text>
-			<Button title='to List' onPress={() => navigation.navigate("List")} />
-			<Button title='to Form' onPress={() => navigation.navigate("Form")} />
-		</View>
+		<Container>
+			<Contents>
+				<Text>sdaf</Text>
+			</Contents>
+		</Container>
 	);
 };
 
