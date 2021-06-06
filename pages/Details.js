@@ -9,11 +9,12 @@ const Text = styled.Text`
 	line-height: 28px;
 `;
 
-const Details = ({ navigation }) => {
+const Details = ({ navigation, route }) => {
+	navigation.setOptions({ title: route.params.date });
 	return (
 		<Container>
 			<Contents>
-				<Text>sdaf</Text>
+				<Text>{route.params.text}</Text>
 			</Contents>
 		</Container>
 	);

@@ -42,7 +42,12 @@ const List = ({ navigation }) => {
 						return (
 							<ListItem
 								key={index}
-								onPress={() => navigation.navigate("Details")}
+								onPress={() =>
+									navigation.navigate("Details", {
+										date: data.date,
+										text: data.text,
+									})
+								}
 							>
 								<Label>Diary from {data.date}</Label>
 							</ListItem>
