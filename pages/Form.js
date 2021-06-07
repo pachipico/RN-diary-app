@@ -32,7 +32,7 @@ const Form = ({ navigation }) => {
 		if (text.replace(/(\s*)/g, "") === "") {
 			return;
 		}
-		let list = await AsyncStorage.getItem("diaries");
+		let list = await AsyncStorage.getItem("diary");
 		if (list === null) {
 			list = [];
 		} else {
@@ -41,9 +41,10 @@ const Form = ({ navigation }) => {
 		list.push({
 			date,
 			text,
+			id: list.length,
 		});
 		console.log(list);
-		await AsyncStorage.setItem("diaries", JSON.stringify(list));
+		await AsyncStorage.setItem("diary", JSON.stringify(list));
 		navigation.goBack();
 	};
 

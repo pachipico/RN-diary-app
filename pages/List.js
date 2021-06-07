@@ -6,6 +6,7 @@ import styled from "styled-components/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
 import { useState } from "react";
+import _ from "lodash";
 
 const ListItem = styled.TouchableOpacity`
 	width: 100%;
@@ -20,7 +21,7 @@ const List = ({ navigation }) => {
 	const [itemList, setItemList] = useState([]);
 
 	const load = async () => {
-		const data = await AsyncStorage.getItem("diaries");
+		const data = await AsyncStorage.getItem("diary");
 		if (data) {
 			setItemList(JSON.parse(data));
 		}
@@ -37,22 +38,18 @@ const List = ({ navigation }) => {
 	return (
 		<Container>
 			<Contents>
-				{itemList &&
-					itemList.map((data, index) => {
-						return (
-							<ListItem
-								key={index}
-								onPress={() =>
-									navigation.navigate("Details", {
-										date: data.date,
-										text: data.text,
-									})
-								}
-							>
-								<Label>Diary from {data.date}</Label>
-							</ListItem>
-						);
-					})}
+				{_.sortBy(itemList, "date").map((data, index) => {
+					return (
+						<ListItem
+							key={index}
+							onPress={() =>
+								navigation.navigate("Details", { date: data.date, id: data.id })
+							}
+						>
+							<Label>Diary from {data.date}</Label>
+						</ListItem>
+					);
+				})}
 			</Contents>
 			<Button onPress={() => navigation.navigate("Form")}>new</Button>
 		</Container>

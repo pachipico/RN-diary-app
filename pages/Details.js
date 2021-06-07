@@ -1,8 +1,9 @@
 import React from "react";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Container from "../components/Container";
 import Contents from "../components/Contents";
 import styled from "styled-components/native";
+import { useState, useEffect } from "react";
 
 const Text = styled.Text`
 	font-size: 20px;
@@ -10,11 +11,21 @@ const Text = styled.Text`
 `;
 
 const Details = ({ navigation, route }) => {
+	const [text, setText] = useState("");
+
+	useEffect(() => {
+		AsyncStorage.getItem("diary").then((data) => {
+			const list = JSON.parse(data);
+			const diary = list.find((element) => element.id === route.params.id);
+			setText(diary.text);
+		});
+	}, []);
+
 	navigation.setOptions({ title: route.params.date });
 	return (
 		<Container>
 			<Contents>
-				<Text>{route.params.text}</Text>
+				<Text>{text}</Text>
 			</Contents>
 		</Container>
 	);
