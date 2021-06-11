@@ -13,10 +13,14 @@ const ListItem = styled.TouchableOpacity`
 	padding: 12px 0;
 	border-bottom-color: #999999;
 	border-bottom-width: 1px;
+	flex-direction: row;
+
+	justify-content: space-between;
 `;
 const Label = styled.Text`
 	font-size: 20px;
 `;
+
 const List = ({ navigation }) => {
 	const [itemList, setItemList] = useState([]);
 
@@ -47,6 +51,7 @@ const List = ({ navigation }) => {
 							}
 						>
 							<Label>Diary from {data.date}</Label>
+							<Label>{data.text.slice(0, 10).trim()}...</Label>
 						</ListItem>
 					);
 				})}
